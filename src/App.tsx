@@ -8,6 +8,9 @@ import RecipePage from './Pages/Recipe';
 function App() {
 
   const [recipes, setRecipes] = useState<IRecipes[]>([]);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
 
 
   useEffect (()=> {
@@ -15,9 +18,30 @@ function App() {
     .then((response) => {
     setRecipes(response.data)}
     );
-  }, [])
+  }, []);
 
-  axios.get<IRecipes>("https://orecipesapi.onrender.com/api/recipes/")
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('https://orecipesapi.onrender.com/api/login/', {
+        email,
+        password
+      });
+
+      const pseudo = response.data.pseudo;
+
+      setMessage(`Bienvenue ${pseudo}`);
+    } catch (error: any) {
+      if (error.response && error.response.status === 401) {
+        setMessage("Erreur de connexion : identifiants incorrects");
+      } else {
+        setMessage("Erreur serveur, réessayez plus tard");
+      }
+    }
+  };
+      
   return ( 
   <div className='app'>
     <header>
@@ -31,12 +55,14 @@ function App() {
     </header>
 
     <main>
-      <form>
+      <form onSubmit={handleSubmit}>
         <img alt="logo" src="./src/assets/Image/logo.png" className="logo-img"/>
-        <input type="text" placeholder="Adresse Email"/>
-        <input type="password" placeholder="Mot de passe"/>
+        <input type="email" value={email} placeholder="Adresse Email" name="email" onChange={(event) => setEmail(event.target.value)} required/>
+        <input type="password" placeholder="Mot de passe" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
         <button type="submit">OK</button>
       </form>
+
+      {message && <p>{message}</p>}
 
         <Routes>
           <Route
