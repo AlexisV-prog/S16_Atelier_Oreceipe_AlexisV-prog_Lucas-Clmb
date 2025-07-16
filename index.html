@@ -1,12 +1,71 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./src/App.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>oRecipes</title>
   </head>
-  <body>
+
+  <body class="container">
+    <header>
+      <ul>
+        <li><a href="#">Accueil</a></li>
+        <li><a href="#">Macaron framboisier</a></li>
+        <li><a href="#">Tarte au citron meringuée</a></li>
+        <li><a href="#">Amandier</a></li>
+        <li><a href="#">Fondant au chocolat sans gluten</a></li>
+      </ul>
+    </header>
+
+    <main>
+      <form>
+        <img alt="logo" src="./src/assets/Image/logo.png" class="logo-img">
+        <input type="text" placeholder="Adresse Email">
+        <input type="password" placeholder="Mot de passe">
+        <button type="submit">OK</button>
+      </form>
+
+      <div>
+        <h1>Les recettes oRecipes</h1>
+        <h3>Voici nos 4 recettes</h3>
+
+        <div class="card-container">
+          <article class="card">
+            <img alt="" class="card-img" src="./src/assets/Image/macaron-framboisier.jpeg">
+            <h2 class="card-title">Macaron framboisier</h2>
+            <p class="card-difficulty">Difficulté: facile</p>
+            <button class="card-button"><a href="#">Voir la recette</a></button>
+
+          </article>
+
+          <article class="card">
+            <img class="card-img" alt="" src="./src/assets/Image/tarte-au-citron.webp">
+            <h2 class="card-title">Tarte au citron meringuée</h2>
+            <p class="card-difficulty">Difficulté: moyen</p>
+            <button class="card-button"><a href="#">Voir la recette</a></button>
+
+          </article>
+          
+          <article class="card">
+            <img class="card-img" alt="" src="./src/assets/Image/amandier.webp">
+            <h2 class="card-title">Amandier</h2>
+            <p class="card-difficulty">Difficulté:</p>
+            <button class="card-button"><a href="#">Voir la recette</a></button>
+          </article>
+
+          <article class="card">
+            <img class="card-img" alt="" src="./src/assets/Image/fondant-au-chocolat.jpg">
+            <h2 class="card-title">Fondant au chocolat sans gluten</h2>
+            <p class="card-difficulty">Difficulté: Facile</p>
+            <button class="card-button"><a href="#">Voir la recette</a></button>
+          </article>
+        </div>
+
+      </div>
+    </main>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
