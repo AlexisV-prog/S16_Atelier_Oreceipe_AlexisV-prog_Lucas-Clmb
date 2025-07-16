@@ -1,26 +1,9 @@
 import { useState, useEffect } from 'react';
+import {Routes, Route, Link} from 'react-router';
 import axios from "axios";
+import type IRecipes from "./@types/recipe";
+import RecipePage from './Pages/Recipe';
 
-interface IRecipes {
-  id: number,
-  title: string,
-  slug: string,
-  thumbnail: string,
-  author: string,
-  difficulty: string,
-  description: string,
-  instructions: [
-    string
-  ],
-  ingredients: [
-    {
-      name: string,
-      id: number,
-      quantity: number,
-      unit: string
-    }
-  ]
-}
 
 function App() {
 
@@ -34,15 +17,16 @@ function App() {
     );
   }, [])
 
+  axios.get<IRecipes>("https://orecipesapi.onrender.com/api/recipes/")
   return ( 
   <div className='app'>
     <header>
       <ul>
         <li><a href="#">Accueil</a></li>
-        <li><a href="#">Macaron framboisier</a></li>
-        <li><a href="#">Tarte au citron meringuée</a></li>
-        <li><a href="#">Amandier</a></li>
-        <li><a href="#">Fondant au chocolat sans gluten</a></li>
+        {recipes.map((recipe)=> (
+          <li key={recipe.id}><a href="#">{recipe.title}</a></li>
+        ))
+        }
       </ul>
     </header>
 
@@ -54,6 +38,10 @@ function App() {
         <button type="submit">OK</button>
       </form>
 
+        <Routes>
+          <Route
+          path="/"
+          element={
       <div>
         <h1>Les recettes oRecipes</h1>
         <h3>Voici nos 4 recettes</h3>
@@ -65,12 +53,19 @@ function App() {
             <img alt="" className="card-img" src={recipe.thumbnail}/>
             <h2 className="card-title">{recipe.title}</h2>
             <p className="card-difficulty">Difficulté: {recipe.difficulty}</p>
-            <button className="card-button"><a href="#">Voir la recette</a></button>
+            <button className="card-button"><Link to={`/${recipe.id}`}>Voir la recette</Link></button>
           </article>
           ))}
         </div>
 
       </div>
+
+          }/>
+            <Route
+            path="/:id"
+            element={<RecipePage recipes={recipes} />}/>
+
+      </Routes>
     </main>
   </div>
   );
