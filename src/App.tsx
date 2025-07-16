@@ -58,7 +58,7 @@ function App() {
       <form onSubmit={handleSubmit}>
         <img alt="logo" src="./src/assets/Image/logo.png" className="logo-img"/>
         <input type="email" value={email} placeholder="Adresse Email" name="email" onChange={(event) => setEmail(event.target.value)} required/>
-        <input type="password" placeholder="Mot de passe" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+        <input type="password" placeholder="Mot de passe" name="password" value={password} onChange={(event) => setPassword(event.target.value)} required/>
         <button type="submit">OK</button>
       </form>
 
@@ -79,7 +79,7 @@ function App() {
             <img alt="" className="card-img" src={recipe.thumbnail}/>
             <h2 className="card-title">{recipe.title}</h2>
             <p className="card-difficulty">Difficulté: {recipe.difficulty}</p>
-            <button className="card-button"><Link to={`/${recipe.id}`}>Voir la recette</Link></button>
+            <button className="card-button"><Link className="button-link" to={`/${recipe.id}`}>Voir la recette</Link></button>
           </article>
           ))}
         </div>
